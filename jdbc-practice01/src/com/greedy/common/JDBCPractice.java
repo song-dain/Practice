@@ -1,0 +1,72 @@
+package com.greedy.common;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class JDBCPractice {
+	
+	public static Connection getConnection() {
+		
+		Connection conn = null;
+		Properties prop = new Properties();
+		
+		try {
+			prop.load(new FileReader("config/connection-info.properties"));
+			
+			String driver = prop.getProperty("driver");
+			String url = prop.getProperty("url");
+			
+			Class.forName(driver);
+			
+			conn = DriverManager.getConnection(url, prop);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return conn;	
+	}
+	
+	public static void close(Connection conn) {
+		
+		try {
+			if(conn != null && conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(Statement stmt) {
+		
+		try {
+			if(stmt != null &&stmt.isClosed()) {
+				stmt.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(ResultSet rest) {
+		
+		try {
+			if(rest != null &&rest.isClosed()) {
+				rest.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
