@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .header {
+            text-align: center;
+            border-bottom: 3px solid black;
+        }
+
+        #record {
+            height: 60px;
+            width : 500px;
+            background: rgb(38, 216, 79);
+            border: 2px solid rgba(0, 0, 0, 0.802);
+            margin: 10px 10px;
+            padding: 10px 10px;
+        }
+
+        .addName {
+            background: rgb(64, 191, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding : 50px 0;
+        }
+
+        .addRecord {
+            background: rgb(64, 191, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding : 50px 0;
+            border-top: 2px dotted rgb(0, 0, 0);
+        }
+
+        .list1 {
+            background-color: rgb(38, 216, 79);
+            list-style-type: none;
+            padding: 10px 50px;
+            border: 2px solid rgba(0, 0, 0, 0.802);
+
+        }
+
+        .footer {
+            background: rgb(64, 191, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding : 50px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
+    <title>Hate React Island</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function Header(props) {
+
+            const onDoubleClickHandler = () => { 
+                const ansewer = window.prompt('⚠ 먼저 이름을 입력하세요')
+                if(ansewer == '우별림'){
+                    alert('리액트를 좋아하는 사람들💗의 방명록 페이지입니다 ')
+                } else {
+                    alert('리액트를 싫어하는 사람들🤮의 방명록 페이지입니다 ')
+                }
+            };
+
+            console.log(prompt.value);
+
+            return (
+                <div className="header">
+                    <h1> ⚓ Visitors' Book 🐱‍🐉</h1>
+                    <h5><a href="#" onDoubleClick={ onDoubleClickHandler }>뭐하는 곳인지 궁금하다면 더블클릭해보세요</a></h5>
+                </div>
+            );
+        }
+
+        function AddName () {
+
+            // Name 목록 State
+            const [visitor, setVisitor] = useState([
+                { id : 1, nic : '아무개'},
+                { id : 2, nic : '이소영'}
+            ]);
+
+            // Name의 값을 받을 State
+            const [inputText, setInputText] = useState('');
+
+            // Name의 새로운 Id를 부여할 State
+            const [nextId, setNextId] = useState(3)
+
+            // visitor.id를 인자로 받아 vistior에서 삭제 
+            const onRemove = id => {
+                // filter()는 true 값만 배열에 넣어줌
+                const changeVisitor = visitor.filter(visitor => visitor.id !== id);
+                // filter로 만들어진 새 목록을 visitor의 새로운 값으로 넣어줌
+                setVisitor(changeVisitor);
+            }
+
+            // inputText의 값이 바뀌면 바로 set해두는 함수
+            const onChangeHandler = e => setInputText(e.target.value);
+
+            // 추가 버튼을 클릭하면 visitor 객체 배열에 새로운 객체를 넣어주는 함수
+            const onClickHandler = () => {
+                // key가 될 id가 2부터 있기 때문에 nextId는 현재 3, set되어 있는 inputText의 값을 nic으로 설정
+                const changeVisitor = visitor.concat({id : nextId, nic : inputText});
+
+                // 새로운 객체 배열 값이 추가된 리스트로 변경
+                setVisitor(changeVisitor);
+                // 추가될 값을 위해 id를 미리 4로 바꿔줌
+                setNextId(nextId + 1);
+                // 추가되면서 텍스트 입력창에 아무것도 없도록 바꿔줌
+                setInputText('');
+
+            };
+
+            const visitorsList = visitor.map(visitor => <li key={ visitor.id } onDoubleClick={()=>onRemove(visitor.id)}> 
+                    {visitor.id % 2 == 1? "🌍" : "🪐"} 
+                    { visitor.nic }
+                     </li>)
+
+            return (
+                <div className="addName">
+                    <h2> 🏴‍☠️ 이름 남기기 </h2>
+                     현재 {visitorsList.length}명이 이름을 남겼습니다! <br/><br/>
+                    <input value={ inputText } onChange={ onChangeHandler }/><br/>
+                    <button onClick={ onClickHandler } id="button2">추가</button><br/>
+                    <b>※ 이름을 삭제하려면 더블클릭하세요</b><br/>
+                    <div className="list1">{ visitorsList.reverse() }</div>
+                    <hr/>
+                    
+                    
+                </div>
+            );
+        }
+
+        function AddRecord() {
+            
+            const [record, setRecord] = useState([
+                {id : 1, rec : 'ㅎㅇㅎㅇ'},
+                {id : 2, rec : '리액트 꼭 잘해야 되냐'}
+            ]);
+
+            const [inputText, setInputText] = useState('');
+            const [nextId, setNextId] = useState(3);
+
+            const onChangeHandler = e => setInputText(e.target.value);
+
+            const onClickHandler = () => {
+                const changeRec = record.concat({id : nextId, rec : inputText});
+                setRecord(changeRec);
+                setNextId(nextId+1);
+                setInputText('');
+            }
+
+            const onRemove = id => {
+                const changeRec = record.filter(record => record.id !== id);
+                setRecord(changeRec);
+            }
+
+            const recordList = record.map(record => <div id="record" key={record.id} onDoubleClick={()=>onRemove(record.id)}>
+                    { record.id % 2 == 1? "🐱‍🚀" : "🐱‍👤"} 
+                    <b>{record.rec}</b><br/><br/>
+                    ----------------------------------------------- Date : {new Date().toDateString()}
+                    </div>);
+
+            return (
+                <div className="addRecord">
+                    <h2> 🏴‍☠️ 방명록 남기기 </h2>
+                     현재 { record.length }명이 방명록을 남겼습니다! <br/><br/>
+                    <textarea cols="77" rows="10" value={ inputText } onChange={ onChangeHandler }></textarea><br/>
+                    <button onClick={ onClickHandler }>추가</button><br/>
+                    <b>※ 방명록을 삭제하려면 더블클릭하세요</b>
+                    <div>{recordList.reverse()}.</div>
+                </div>
+            );
+        }
+
+        function Footer () {
+            return (
+                <div className="footer">
+                    <button onClick={ () => alert('나가세요') }>눌러보세요</button>
+                </div>
+            );
+        }
+
+
+        function App() {
+            return (
+                <>
+                    <Header/>
+                    <AddName/>
+                    <AddRecord/>
+                    <Footer/>
+                </>
+            );
+        }
+
+        ReactDOM.render(<App/>, document.getElementById('root'));
+
+    </script>
+</body>
+</html>
