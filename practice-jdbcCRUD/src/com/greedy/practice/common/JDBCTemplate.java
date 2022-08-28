@@ -1,4 +1,4 @@
-package com.greedy.common;
+package com.greedy.practice.common;
 
 import java.io.FileReader;
 import java.io.IOException;
