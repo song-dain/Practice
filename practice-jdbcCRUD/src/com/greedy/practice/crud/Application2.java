@@ -21,9 +21,6 @@ public class Application2 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("추가할 회원 코드를 입력하세요 : ");
-		int code = sc.nextInt();
-		sc.nextLine();
 		System.out.print("추가할 회원 아이디를 입력하세요 : ");
 		String id = sc.nextLine();
 		System.out.print("추가할 회원 비밀번호를 입력하세요 : ");
@@ -44,15 +41,13 @@ public class Application2 {
 			prop.loadFromXML(new FileInputStream("mapper/member-query.xml"));
 			String query = prop.getProperty("insertMember");
 			
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, code);
-			pstmt.setString(2, id);
-			pstmt.setString(3, pwd);
-			pstmt.setString(4, name);
-			pstmt.setString(5, gender);
+			pstmt = conn.prepareStatement(query);;
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			pstmt.setString(3, name);
+			pstmt.setString(4, gender);
 			
 			result = pstmt.executeUpdate();
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();

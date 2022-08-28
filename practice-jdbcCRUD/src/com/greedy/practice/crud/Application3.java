@@ -36,8 +36,8 @@ public class Application3 {
 			String query = prop.getProperty("changePwd");
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, newPwd);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, memberId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -49,8 +49,6 @@ public class Application3 {
 			close(pstmt);
 			close(conn);
 		}
-		
-		
 		
 		if(result > 0) {
 			System.out.println("비밀번호 수정 성공.");

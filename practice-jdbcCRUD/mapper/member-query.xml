@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<!-- MENU 테이블에 전달되는 값을 INSERT하는 구문 -->
-	<entry key="insertMenu">
+	<entry key="selectMember">
+		SELECT
+			  MEMBER_CODE
+			, MEMBER_ID
+			, MEMBER_PWD
+			, NAME
+			, GENDER
+		FROM MEMBER_INFO
+	   WHERE NAME = ?
+	</entry>
+	<entry key="insertMember">
 		INSERT
-		  INTO TBL_MENU
+		  INTO MEMBER_INFO
 		(
-		  MENU_CODE
-		, MENU_NAME
-		, MENU_PRICE
-		, CATEGORY_CODE
-		, ORDERABLE_STATUS
+		  MEMBER_CODE
+		, MEMBER_ID
+		, MEMBER_PWD
+		, NAME
+		, GENDER
 		)
 		VALUES
 		(
@@ -21,19 +30,16 @@
 		, ?
 		)
 	</entry>
-	<entry key="updateMenu">
+	<entry key="changePwd">
 		UPDATE
-		       TBL_MENU
-		   SET MENU_NAME = ?
-		     , MENU_PRICE = ?
-		     , CATEGORY_CODE = ?
-		     , ORDERABLE_STATUS = ?
-		 WHERE MENU_CODE = ?
+		       MEMBER_INFO
+		   SET MEMBER_PWD = ?
+		 WHERE MEMBER_ID = ?
 	</entry>
-	<entry key="deleteMenu">
+	<entry key="deleteInfo">
 		DELETE
-		  FROM TBL_MENU 
-		 WHERE MENU_CODE = ?
+		  FROM MEMBER_INFO 
+		 WHERE MEMBER_ID = ?
 	</entry>
 </properties>
 
