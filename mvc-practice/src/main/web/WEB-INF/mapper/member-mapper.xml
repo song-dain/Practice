@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="memberList">
+		SELECT
+			  MEMBER_CODE
+			, MEMBER_ID
+			, MEMBER_PWD
+			, NAME
+			, GENDER
+			, MEMBER_LEVEL
+			, REGIST_DATE
+			, EXTEND_YN
+			, EXPIRY_DATE
+		  FROM SP_MEMBER
+	</entry>
+	<entry key="searchMember">
+		SELECT
+			  MEMBER_CODE
+			, MEMBER_ID
+			, MEMBER_PWD
+			, NAME
+			, GENDER
+			, MEMBER_LEVEL
+			, REGIST_DATE
+			, EXTEND_YN
+		 	, EXPIRY_DATE
+		 FROM SP_MEMBER
+		WHERE NAME = ?
+	</entry>
+	<entry key="changeExpiryDate">
+		UPDATE
+			   SP_MEMBER
+		   SET EXPIRY_DATE = ?
+		     , EXTEND_YN = 'Y'
+		 WHERE NAME = ?
+	</entry>
+		<entry key="deleteMember">
+		DELETE
+		  FROM SP_MEMBER
+	     WHERE NAME = ?
+	</entry>
+	<entry key="회원등록">
+		INSERT
+		  INTO EMPLOYEE
+		 (
+		 	EMP_ID
+		  , EMP_NAME
+		  , EMP_NO
+		  , EMAIL
+		  , PHONE
+		  , DEPT_CODE
+		  , JOB_CODE
+		  , SAL_LEVEL
+		  , SALARY
+		  , BONUS
+		  , MANAGER_ID
+		  , HIRE_DATE
+		  , ENT_DATE
+		  , ENT_YN
+		 )
+		 VALUES
+		 (
+		    SEQ_EMP_ID.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , NULL
+		  , DEFAULT
+		 )
+	</entry>
+
+</properties>
+
+
+
+
+
+
+
+
+
+
+
+
