@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DD Swim</title>
 </head>
 <body>
-	<h1>Practice</h1>
+	<h1 align="center">D Swim 회원 정보 관리부 🏊‍♀️ </h1>
 </body>
 </html>

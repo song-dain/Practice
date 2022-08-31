@@ -86,11 +86,15 @@ public class MemberDAO {
 			if(rset.next()) {
 				
 				member = new MemberDTO();
-				
+			
 				member.setCode(rset.getInt("MEMBER_CODE"));
 				member.setId(rset.getString("MEMBER_ID"));
 				member.setName(rset.getString("NAME"));
 				member.setGender(rset.getString("GENDER"));
+				member.setLevel(rset.getString("MEMBER_LEVEL"));
+				member.setRegistDate(rset.getDate("REGIST_DATE"));
+				member.setExpiryDate(rset.getDate("EXPIRY_DATE"));
+				member.setExtendYn(rset.getString("EXTEND_YN"));
 	
 			}
 			
@@ -137,6 +141,34 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int joinMembership(Connection conn, MemberDTO member) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("joinMembership");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPwd());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getGender());
+			pstmt.setString(5, member.getLevel());
+			pstmt.setDate(6, member.getRegistDate());
+			pstmt.setDate(7, member.getExpiryDate());
 			
 			result = pstmt.executeUpdate();
 			

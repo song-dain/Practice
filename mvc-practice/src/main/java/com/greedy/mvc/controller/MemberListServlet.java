@@ -27,7 +27,7 @@ public class MemberListServlet extends HttpServlet {
 			request.setAttribute("allMember", allMember);
 		} else {
 			path = "/WEB-INF/views/common/errorPage.jsp";
-			request.setAttribute("message", "직원 조회 실패하였습니다.");
+			request.setAttribute("message", "전체 회원 조회에 실패하였습니다.");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);

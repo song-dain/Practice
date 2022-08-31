@@ -40,44 +40,33 @@
 		  FROM SP_MEMBER
 	     WHERE NAME = ?
 	</entry>
-	<entry key="회원등록">
+	<entry key="joinMembership">
 		INSERT
-		  INTO EMPLOYEE
+		  INTO SP_MEMBER
 		 (
-		 	EMP_ID
-		  , EMP_NAME
-		  , EMP_NO
-		  , EMAIL
-		  , PHONE
-		  , DEPT_CODE
-		  , JOB_CODE
-		  , SAL_LEVEL
-		  , SALARY
-		  , BONUS
-		  , MANAGER_ID
-		  , HIRE_DATE
-		  , ENT_DATE
-		  , ENT_YN
+		 	MEMBER_CODE
+		  , MEMBER_ID
+		  , MEMBER_PWD
+		  , NAME
+		  , GENDER
+		  , MEMBER_LEVEL
+		  , REGIST_DATE
+		  , EXTEND_YN
+		  , EXPIRY_DATE
 		 )
 		 VALUES
 		 (
-		    SEQ_EMP_ID.NEXTVAL
+		    SEQ_MEMBER_CODE.NEXTVAL
 		  , ?
 		  , ?
 		  , ?
 		  , ?
 		  , ?
 		  , ?
-		  , ?
-		  , ?
-		  , ?
-		  , ?
-		  , ?
-		  , NULL
 		  , DEFAULT
+		  , ?
 		 )
 	</entry>
-
 </properties>
 
 

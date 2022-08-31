@@ -24,11 +24,14 @@ public class DeleteMemberServlet extends HttpServlet {
 		String path = "";
 		if(result > 0) {
 			path = "/WEB-INF/views/common/successPage.jsp";
-			request.setAttribute("successCode", "deleteMember");
+			request.setAttribute("succCode", "deleteMember");
 		} else {
 			path = "/WEB-INF/views/common/errorPage.jsp";
-			request.setAttribute("message", "회원 정보가 삭제되었습니다.");
+			request.setAttribute("message", "회원 정보 삭제에 실패하였습니다.");
 		}
+		
+		request.getRequestDispatcher(path).forward(request, response);
 	}
+	
 
 }

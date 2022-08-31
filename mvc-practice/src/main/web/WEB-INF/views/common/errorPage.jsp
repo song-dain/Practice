@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body> 	
+	<jsp:include page="../common/header.jsp"/>
 	<h1>${ requestScope.message }</h1>
 </body>
 </html>

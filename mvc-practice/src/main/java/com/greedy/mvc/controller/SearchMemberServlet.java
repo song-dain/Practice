@@ -29,7 +29,7 @@ public class SearchMemberServlet extends HttpServlet {
 			request.setAttribute("searchMember", searchMember);
 		} else {
 			path = "/WEB-INF/views/common/errorPage.jsp";
-			request.setAttribute("message", "일치하는 회원이 없습니다.");
+			request.setAttribute("message", "회원 조회에 실패하였습니다.");
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);

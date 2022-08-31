@@ -7,29 +7,36 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
 	<script>
-		(function()){
-			const successCode = '${ requestScope.successCode }';
-		}
-		
-		let successMessage = '';
-		let movePath = '';
-		
-		switch(successCode){
-		case 'updateExpiry' :
-			successMessage = '회원권이 연장되었습니다.';
-			movePath = '${ pageContext.servletContext.contextPath }/member/list';
-			break;
-		case 'deleteMember' :
-			successMessage = '정보 삭제 완료되었습니다.';
-			movePath = '${ pageContext.servletContext.contextPath }/member/list';
-		}
-		
-		alert(successMessage);
-		location.href = movePath;
+		(function(){
+			
+			const succCode = '${ requestScope.succCode }';
+			
+			let successMessage = '';
+			let movePath = '';
+			
+			switch(succCode) {
+			case 'updateExpiry' : 
+				successMessage = '회원권이 연장되었습니다!'
+				movePath = '${ pageContext.servletContext.contextPath }/member/search?name=${name}';
+				break;
+			case 'joinMembership' : 
+				successMessage = '회원이 등록되었습니다!'
+				movePath = '${ pageContext.servletContext.contextPath }/member/search?name=${name}';
+				break;
+			case 'deleteMember' : 
+				successMessage = '회원 정보가 삭제되었습니다.'
+				movePath = '${ pageContext.servletContext.contextPath }/member/list';
+				break;
+			
+			}
+			
+			alert(successMessage);
+			location.href = movePath;
+			
+		})();
 	</script>
-	
-	회원권이 연장되었습니다.
 
 </body>
 </html>

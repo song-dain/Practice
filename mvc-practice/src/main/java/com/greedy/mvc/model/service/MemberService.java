@@ -75,7 +75,21 @@ public class MemberService {
 		return result;
 	}
 
-
-
-
+	public int joinMembership(MemberDTO member) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.joinMembership(conn, member);
+		
+		close(conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 }
